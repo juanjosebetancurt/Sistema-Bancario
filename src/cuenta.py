@@ -10,3 +10,15 @@ class Cuenta:
         
     def __str__(self):
         return f"Cuenta(numero='{self.numero_cuenta}', tipo_cuenta='{self.tipo_cuenta}',saldo={self.saldo})"
+    
+    def depositar(self, monto: float):
+        if monto <= 0:
+            raise ValueError("el monto a depositar debe ser mayor que cero")
+        self.saldo += monto
+        
+    def retirar(self, monto: float):
+        if monto <= 0:
+            raise ValueError("el monto a retirar debe ser mayor que cero")
+        if monto > self.saldo:
+            raise ValueError("fondos insuficientes")
+        self.saldo -= monto
