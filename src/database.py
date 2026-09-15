@@ -15,7 +15,7 @@ def crear_tablas():
                    CREATE TABLE IF NOT EXISTS clientes(
                        id INTEGER PRIMARY KEY AUTOINCREMENT,
                        nombre TEXT NOT NULL,
-                       documento TEXT NOT NULL,
+                       documento TEXT NOT NULL UNIQUE,
                        email TEXT NOT NULL
                    )
                    """)
@@ -24,7 +24,7 @@ def crear_tablas():
                     CREATE TABLE IF NOT EXISTS cuentas(
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         cliente_id integer NOT NULL,
-                        numero_cuenta TEXT NOT NULL,
+                        numero_cuenta TEXT NOT NULL UNIQUE,
                         tipo_cuenta TEXT NOT NULL,
                         saldo REAL NOT NULL DEFAULT 0,
                         FOREIGN KEY (cliente_id) REFERENCES clientes(id)

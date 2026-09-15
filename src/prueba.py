@@ -1,21 +1,18 @@
+import sqlite3
 from cliente import Cliente
-from cuenta import Cuenta 
+from cliente_repositorio import ClienteRepositorio
 
-c1 = Cliente ("juan cuero", "233455655", "juancuero@gmail.com")
+repo = ClienteRepositorio()
 
-
-cuenta1 = Cuenta(cliente_id=1, numero_cuenta="0001-0001", saldo=100.0)
-
-cuenta1.depositar(50)
-print(cuenta1)
-
-cuenta1.retirar(30)
-print(cuenta1)
+nuevo_cliente = Cliente("Juan Perez", "999888", "juan.perez@mail.com")
 
 try:
-    cuenta1.retirar(1000)
-except ValueError as error:
-    print(f"No se puede retirar: {error}")
-    
-print("el programa sigue corriendo normalmente")
-print(cuenta1)
+    guardado = repo.guardar(nuevo_cliente)
+    print("Guardado:", guardado)
+except sqlite3.IntegrityError as error:
+    print(f"No se pudo guardar el cliente: {error}")
+
+todos = repo.listar_todos()
+print("Todos los clientes:")
+for c in todos:
+    print(" -", c)
