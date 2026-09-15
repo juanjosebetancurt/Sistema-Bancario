@@ -1,18 +1,25 @@
 import sqlite3
+import uuid
 from cliente import Cliente
 from cliente_repositorio import ClienteRepositorio
+from cuenta import Cuenta
+from cuenta_repositorio import CuentaRepositorio
 
-repo = ClienteRepositorio()
+cliente_repo = ClienteRepositorio()
+cuenta_repo = CuentaRepositorio()
 
-nuevo_cliente = Cliente("Juan Perez", "999888", "juan.perez@mail.com")
+# Reutilizamos el cliente que ya existe (id=1), no creamos uno nuevo
+nueva_cuenta = Cuenta(
+	cliente_id=1,
+	numero_cuenta=f"0001-{uuid.uuid4().hex[:8]}",
+	saldo=200.0,
+)
+guardada = cuenta_repo.guardar(nueva_cuenta)
+print("Cuenta guardada:", guardada)
 
-try:
-    guardado = repo.guardar(nuevo_cliente)
-    print("Guardado:", guardado)
-except sqlite3.IntegrityError as error:
-    print(f"No se pudo guardar el cliente: {error}")
+guardada.depositar(100)
+cuenta_repo.actualizar_saldo(guardada)
+print("Saldo actualizado en memoria:", guardada)
 
-todos = repo.listar_todos()
-print("Todos los clientes:")
-for c in todos:
-    print(" -", c)
+recuperada = cuenta_repo.buscar_por_id(guardada.id)
+print("Cuenta recuperada de la base de datos:", recuperada)
