@@ -30,6 +30,17 @@ def crear_tablas():
                         FOREIGN KEY (cliente_id) REFERENCES clientes(id)
                     )
                     """)
+    
+    cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS transacciones (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        cuenta_id INTEGER NOT NULL,
+                        tipo TEXT NOT NULL,
+                        monto REAL NOT NULL,
+                        fecha TEXT NOT NULL,
+                        FOREIGN KEY (cuenta_id) REFERENCES cuentas (id)
+        )
+    """)
     conexion.commit()
     conexion.close()    
     print("tablas creadas correctamnente")
