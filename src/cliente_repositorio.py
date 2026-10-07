@@ -11,7 +11,7 @@ class ClienteRepositorio:
         )
         conexion.commit()
         cliente.id = cursor.lastrowid
-        conexion.close
+        conexion.close()
         return cliente
     
     def buscar_por_id(self , id: int) -> Cliente:
