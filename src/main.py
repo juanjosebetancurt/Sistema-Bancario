@@ -20,7 +20,8 @@ def mostrar_menu():
     print("5. Transferir")
     print("6. Consultar saldo")
     print("7. Historial")
-    print("8. Salir")
+    print("8. Listar clientes")
+    print("9. Salir")
     
     
 def crear_cliente():
@@ -98,6 +99,15 @@ def ver_historial():
     except ValueError:
         print("el ID debe ser un numero")        
 
+def listar_clientes():
+    clientes = cliente_repo.listar_todos()
+    if not clientes:
+        print("No hay clientes registrados.")
+    else:
+        for c in clientes:
+            print(f"ID - {c.id} | {c.nombre} | Documento: {c.documento} ") 
+    
+
 def salir():
     print("hasta luego!")
     raise SystemExit
@@ -113,7 +123,8 @@ def main():
         "5": transferir,
         "6": consultar_saldo,
         "7": ver_historial,
-        "8": salir,
+        "8": listar_clientes,
+        "9": salir,
         "0": salir,
     }
 
