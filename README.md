@@ -1,15 +1,15 @@
 # Banking system 
 
-A project to learn OPP and SQL usin Python and SQLite 
+A project to learn OOP and SQL using Python and SQLite 
 
-## features 
+## Features 
 - create customers and accounts
 - Deposit and withdraw funds
-- tranfers money between accounts 
+- transfers money between accounts 
 - check balance 
 - transaction history 
 
-## technologies
+## Technologies
 
 - Python 
 - SQLite 
